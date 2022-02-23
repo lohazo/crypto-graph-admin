@@ -1,0 +1,28 @@
+query RewardTransactions(
+  $offset: Int
+  $limit: Int
+  $where: reward_transaction_bool_exp
+) {
+  reward_transaction(
+    offset: $offset
+    limit: $limit
+    order_by: { created_at: desc }
+    where: $where
+  ) {
+    id
+    created_at
+    amount
+    claim_fee
+    transaction_hash
+    status
+    refunded
+    is_approved
+    recipient
+  }
+
+  reward_transaction_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}

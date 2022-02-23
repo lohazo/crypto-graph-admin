@@ -1,0 +1,5 @@
+query PocoPrice {
+  poco_price {
+    price
+  }
+}

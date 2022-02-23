@@ -1,0 +1,15 @@
+query DashBoard {
+  user_aggregate {
+    aggregate {
+      count
+    }
+  }
+
+  reward_transaction_aggregate {
+    aggregate {
+      sum {
+        amount
+      }
+    }
+  }
+}

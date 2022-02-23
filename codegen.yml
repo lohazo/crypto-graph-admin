@@ -1,0 +1,21 @@
+overwrite: true
+schema:
+  # - http://pancake-bot-hasura.netlambda.com/v1/graphql:
+  - https://admin-api.pocoland.com/v1/graphql:
+      headers:
+        "x-hasura-admin-secret": "YmRhMTUyNzQ0MmZkNTVhNDliYmIxMDhlOWRkNDA0YTgK"
+documents:
+  - "src/**/*.graphql"
+  - "pages/**/*.tsx"
+  - "components/**/*.tsx"
+  - "hooks/**/*.tsx"
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "urql-introspection"
+      - "typescript-urql"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"

@@ -1,0 +1,21 @@
+query PocoCharacter($limit: Int, $offset: Int, $where: poco_character_bool_exp){
+  poco_character(limit: $limit, offset: $offset, order_by: {created_at: desc}, where: $where) {
+    id
+    element
+    eggType
+    mint_source
+    nft_id
+    skill
+    skin
+    user {
+      id
+      address
+    }
+  }
+
+  poco_character_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}

@@ -1,0 +1,9 @@
+mutation ApproveRefundTransaction($id: Int!, $is_approved: Boolean!) {
+  update_reward_transaction_by_pk(
+    pk_columns: { id: $id }
+    _set: { is_approved: $is_approved }
+  ) {
+    id
+    is_approved
+  }
+}
