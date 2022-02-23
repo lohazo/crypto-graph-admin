@@ -106,7 +106,7 @@ function MyApp({ Component: Page, pageProps }: AppProps) {
         audience={process.env.NEXT_PUBLIC_AUDIENCE}
         // scope="read:users"
         // @ts-ignore
-        redirectUri={"http://localhost:3000/callback"}
+        redirectUri={"https://poco-admin-ui.pages.dev/callback"}
         onRedirectCallback={onRedirectCallback}
       >
         <Provider value={client}>
