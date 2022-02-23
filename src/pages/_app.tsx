@@ -103,7 +103,7 @@ function MyApp({ Component: Page, pageProps }: AppProps) {
       <Auth0Provider
         domain={process.env.NEXT_PUBLIC_DOMAIN as string}
         clientId={process.env.NEXT_PUBLIC_CLIENT_ID as string}
-        audience={process.env.NEXT_PUBLIC_AUDIENCE}
+        // audience={process.env.NEXT_PUBLIC_AUDIENCE}
         // scope="read:users"
         // @ts-ignore
         redirectUri={"https://poco-admin-ui.pages.dev/callback"}
