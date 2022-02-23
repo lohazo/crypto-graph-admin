@@ -64,16 +64,26 @@ const Login = () => {
       //   filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='#699bc8', endColorstr='#b5c5d8',GradientType=1 )"
       // }}
     >
-      <div
-        className="w-[150px] h-[150px] p-8 rounded-[50%] bg-[rgba(1,1,1,.8)] opacity-40 cursor-pointer flex justify-center items-center flex-col"
-        style={{
-          boxShadow: "10px 10px 30px #333",
-        }}
-        onClick={loginWithRedirect}
+      <a
+        href={
+          "https://" +
+          process.env.NEXT_PUBLIC_DOMAIN +
+          "/authorize?client_id=" +
+          process.env.NEXT_PUBLIC_CLIENT_ID +
+          "&response_type=token%20id_token&redirect_uri=https://poco-admin-ui.pages.dev/callback&scope=openid%20profile&nonce=mynonce"
+        }
       >
-        <img src="/images/icons/login-w-icon.png" alt="login icon" />
-        <p className="text-xs text-white">Login</p>
-      </div>
+        <div
+          className="w-[150px] h-[150px] p-8 rounded-[50%] bg-[rgba(1,1,1,.8)] opacity-40 cursor-pointer flex justify-center items-center flex-col"
+          style={{
+            boxShadow: "10px 10px 30px #333",
+          }}
+          // onClick={loginWithRedirect}
+        >
+          <img src="/images/icons/login-w-icon.png" alt="login icon" />
+          <p className="text-xs text-white">Login</p>
+        </div>
+      </a>
 
       {/* <LoginForm>
         <ProFormText
