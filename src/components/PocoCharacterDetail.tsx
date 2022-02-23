@@ -1,7 +1,7 @@
 import { Button, Drawer } from "antd";
 import React, { useEffect, useState } from "react";
 
-function PocoCharacterDetail({ id }) {
+function PocoCharacterDetail({ id }: { id: number }) {
   const [visible, setVisible] = useState(false);
   const showDrawer = () => {
     setVisible(true);
@@ -46,8 +46,10 @@ function PocoCharacterDetail({ id }) {
           <table>
             <tbody>
               {pocoData.attributes?.map((i: any) => (
-                <tr>
-                  <td><p className="font-bold">{i.trait_type}</p></td>
+                <tr key={i.trait_type}>
+                  <td>
+                    <p className="font-bold">{i.trait_type}</p>
+                  </td>
                   <td>{i.value}</td>
                   <td>
                     {i.image && <img src={i.image} width={24} height={24} />}
