@@ -50,6 +50,14 @@ const client = createClient({
                 cache.invalidate("Query", query.fieldName, query.arguments)
               );
           },
+          update_user_by_pk(_result, args, cache, _info) {
+            cache
+              .inspectFields("Query")
+              .filter((q) => q.fieldName === "user")
+              .forEach((query) =>
+                cache.invalidate("Query", query.fieldName, query.arguments)
+              );
+          },
         },
       },
     }),
