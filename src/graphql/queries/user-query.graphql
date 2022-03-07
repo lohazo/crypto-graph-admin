@@ -1,9 +1,6 @@
 query User($limit: Int, $offset: Int, $where: user_bool_exp) {
   user(limit: $limit, offset: $offset, where: $where) {
-    id
-    address
-    email
-    status
+    ...UserData
   }
   user_aggregate(where: $where) {
     aggregate {
