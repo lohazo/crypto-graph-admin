@@ -31,9 +31,9 @@
     "moment": "^2.29.1",
     "next": "^12.1.0",
     "rc-virtual-list": "^3.4.2",
-    "react": "^18.0.0-rc.0-next-fe905f152-20220107",
+    "react": "^18.0.0-rc.1",
     "react-copy-to-clipboard": "^5.0.4",
-    "react-dom": "^18.0.0-rc.0-next-fe905f152-20220107",
+    "react-dom": "^18.0.0-rc.1",
     "react-highlight-words": "^0.17.0",
     "urql": "^2.0.6"
   },

@@ -3,6 +3,7 @@ query User($limit: Int, $offset: Int, $where: user_bool_exp) {
     id
     address
     email
+    status
   }
   user_aggregate(where: $where) {
     aggregate {

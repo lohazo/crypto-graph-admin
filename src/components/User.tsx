@@ -3,6 +3,7 @@ import {
   Button,
   Card,
   Input,
+  notification,
   Popconfirm,
   Space,
   Table,
@@ -204,18 +205,24 @@ function User() {
   const [visiblePopUnBan, setVisiblePopUnBan] = React.useState(false);
   const [updateUserM, updateUser] = useUpdateUserMutation();
   const handleBanAccount = async (id: number) => {
-    await updateUser({
-      id: id,
-      status: "BANNED",
-    });
-    setVisiblePopBan(false)
+    try {
+      await updateUser({
+        id: id,
+        status: "BANNED",
+      });
+      setVisiblePopBan(false);
+      notification.success({ message: "Account banned successfully" });
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleUnBanAccount = async (id: number) => {
     await updateUser({
       id: id,
       status: "NORMAL",
     });
-    setVisiblePopUnBan(false)
+    setVisiblePopUnBan(false);
+    notification.success({ message: "Account unbanned successfully" });
   };
 
   const columns: ColumnsType<User> = [
@@ -234,12 +241,22 @@ function User() {
       },
     },
     {
+      title: "Status",
+      // dataIndex: "email",
+      key: "status",
+      render: (_, record) => {
+        return record.status;
+      },
+    },
+    {
       title: "Action",
       key: "action",
       render: (_, record) => {
         return (
           <div className="flex">
-            <Popconfirm
+            <Button onClick={() => handleBanAccount(record.id)}>Ban</Button>
+            <Button onClick={() => handleUnBanAccount(record.id)}>UnBan</Button>
+            {/* <Popconfirm
               title="Confirm to BAN account?"
               visible={visiblePopBan}
               onConfirm={() => handleBanAccount(record.id)}
@@ -264,7 +281,7 @@ function User() {
               <Button onClick={() => setVisiblePopUnBan(true)}>
                 UnBan
               </Button>
-            </Popconfirm>
+            </Popconfirm> */}
           </div>
         );
       },
