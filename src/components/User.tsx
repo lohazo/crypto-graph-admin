@@ -1,10 +1,22 @@
 import { SearchOutlined } from "@ant-design/icons";
-import { Button, Card, Input, Popconfirm, Space, Table, Typography } from "antd";
+import {
+  Button,
+  Card,
+  Input,
+  Popconfirm,
+  Space,
+  Table,
+  Typography,
+} from "antd";
 import { ColumnsType } from "antd/es/table";
 import Text from "antd/lib/typography/Text";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
-import { User, useUserQuery } from "../generated/graphql";
+import {
+  User,
+  useUpdateUserMutation,
+  useUserQuery,
+} from "../generated/graphql";
 import { shortenAddress } from "../lib/shortenAddress";
 
 function User() {
@@ -187,6 +199,25 @@ function User() {
         </Typography.Link>
       ),
   });
+
+  const [visiblePopBan, setVisiblePopBan] = React.useState(false);
+  const [visiblePopUnBan, setVisiblePopUnBan] = React.useState(false);
+  const [updateUserM, updateUser] = useUpdateUserMutation();
+  const handleBanAccount = async (id: number) => {
+    await updateUser({
+      id: id,
+      status: "BANNED",
+    });
+    setVisiblePopBan(false)
+  };
+  const handleUnBanAccount = async (id: number) => {
+    await updateUser({
+      id: id,
+      status: "NORMAL",
+    });
+    setVisiblePopUnBan(false)
+  };
+
   const columns: ColumnsType<User> = [
     {
       title: "Address",
@@ -199,23 +230,42 @@ function User() {
       // dataIndex: "email",
       key: "email",
       render: (_, record) => {
-        return record.email ?? "Not connected yet"
-      }
+        return record.email ?? "Not connected yet";
+      },
     },
     {
       title: "Action",
       key: "action",
       render: (_, record) => {
         return (
-          <Popconfirm
-            title="Confirm to approve transaction?"
-            // onConfirm={() => handleApproveTransaction(record.id)}
-            // onCancel={cancel}
-            okText="Yes"
-            cancelText="No"
-          >
-            <a href="#">Ban</a>
-          </Popconfirm>
+          <div className="flex">
+            <Popconfirm
+              title="Confirm to BAN account?"
+              visible={visiblePopBan}
+              onConfirm={() => handleBanAccount(record.id)}
+              okButtonProps={{ loading: updateUserM.fetching }}
+              // onCancel={cancel}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Button onClick={() => setVisiblePopBan(true)}>
+                Ban
+              </Button>
+            </Popconfirm>
+            <Popconfirm
+              title="Confirm to UNBAND account?"
+              visible={visiblePopUnBan}
+              onConfirm={() => handleUnBanAccount(record.id)}
+              okButtonProps={{ loading: updateUserM.fetching }}
+              // onCancel={cancel}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Button onClick={() => setVisiblePopUnBan(true)}>
+                UnBan
+              </Button>
+            </Popconfirm>
+          </div>
         );
       },
     },
