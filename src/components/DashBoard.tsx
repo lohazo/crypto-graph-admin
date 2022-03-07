@@ -11,7 +11,7 @@ function DashBoard() {
 
   return (
     <div className="pt-4">
-      <div className="grid grid-cols-4 gap-8">
+      <div className="grid gap-8 md:grid-cols-3">
         <Card>
           <Statistic
             title="Total user"

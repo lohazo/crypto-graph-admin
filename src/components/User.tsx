@@ -196,8 +196,11 @@ function User() {
     },
     {
       title: "Email",
-      dataIndex: "email",
+      // dataIndex: "email",
       key: "email",
+      render: (_, record) => {
+        return record.email ?? "Not connected yet"
+      }
     },
     {
       title: "Action",
