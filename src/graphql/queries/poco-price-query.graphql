@@ -1,5 +1,5 @@
 query PocoPrice {
-  poco_price {
+  token_price {
     price
   }
 }

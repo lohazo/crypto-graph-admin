@@ -15,10 +15,7 @@ function PocoCharacterDetail({ id }: { id: number }) {
   async function getData() {
     const res = await fetch("https://api.pocoland.com/meta/" + id);
     const data = await res.json();
-    console.log(
-      "🚀 ~> file: PocoCharacterDetail.tsx ~> line 16 ~> getData ~> data",
-      data
-    );
+
     setPocoData(data);
     return data;
   }

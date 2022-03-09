@@ -24,7 +24,7 @@ function DashBoard() {
             value={
               new BigNumber(
                 queryResult.data?.reward_transaction_aggregate.aggregate?.sum?.amount
-              ).toFixed(2) + " PL"
+              ).toFixed(2) + " "
             }
           />
         </Card>

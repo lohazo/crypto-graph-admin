@@ -13,7 +13,7 @@ import Text from "antd/lib/typography/Text";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import {
-  Poco_Character,
+  Character,
   usePocoCharacterQuery,
   User,
   useUserQuery,
@@ -41,9 +41,8 @@ function PocoCharacter() {
     },
   });
 
-  const total =
-    queryResult.data?.poco_character_aggregate.aggregate?.count || 0;
-  const data = queryResult.data?.poco_character || [];
+  const total = queryResult.data?.character_aggregate.aggregate?.count || 0;
+  const data = queryResult.data?.character || [];
 
   // @ts-ignore
   function onChange(pagination, filters, sorter, extra) {
@@ -188,7 +187,7 @@ function PocoCharacter() {
         <Typography.Link
           target="_blank"
           rel="noreferrer"
-          href={`https://pocoland.com/nft/${text}`}
+          href={`https://lastsurvivor.io/nft/${text}`}
         >
           {text}
         </Typography.Link>
@@ -196,13 +195,13 @@ function PocoCharacter() {
         <Typography.Link
           target="_blank"
           rel="noreferrer"
-          href={`https://pocoland.com/nft/${text}`}
+          href={`https://lastsurvivor.io/nft/${text}`}
         >
           {text}
         </Typography.Link>
       ),
   });
-  const columns: ColumnsType<Poco_Character> = [
+  const columns: ColumnsType<Character> = [
     {
       title: "NFT ID",
       // key: "recipient",
@@ -247,7 +246,7 @@ function PocoCharacter() {
 
   return (
     <div className="py-4">
-      <Card title="Poco Characters">
+      <Card title="Characters">
         <Table
           loading={queryResult.fetching}
           columns={columns}

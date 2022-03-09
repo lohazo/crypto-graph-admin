@@ -70,7 +70,7 @@ const Login = () => {
           process.env.NEXT_PUBLIC_DOMAIN +
           "/authorize?client_id=" +
           process.env.NEXT_PUBLIC_CLIENT_ID +
-          "&response_type=token%20id_token&redirect_uri=https://poco-admin-ui.pages.dev/callback&scope=openid%20profile&nonce=mynonce"
+          `&response_type=token%20id_token&redirect_uri=${process.env.NEXT_PUBLIC_CALLBACK_URL}&scope=openid%20profile&nonce=mynonce`
         }
       >
         <div

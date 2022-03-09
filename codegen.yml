@@ -1,7 +1,7 @@
 overwrite: true
 schema:
   # - http://pancake-bot-hasura.netlambda.com/v1/graphql:
-  - https://admin-api.pocoland.com/v1/graphql:
+  - https://admin-api-dev.lastsurvivor.io/v1/graphql:
       headers:
         "x-hasura-admin-secret": "YmRhMTUyNzQ0MmZkNTVhNDliYmIxMDhlOWRkNDA0YTgK"
 documents:

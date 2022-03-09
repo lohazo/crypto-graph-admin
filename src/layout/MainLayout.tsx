@@ -96,7 +96,7 @@ const MainLayout: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
               <Link href="/user">User</Link>
             </Menu.Item>
             <Menu.Item key="3" icon={<UserOutlined />}>
-              <Link href="/character">Poco Character</Link>
+              <Link href="/character">Character</Link>
             </Menu.Item>
 
             {/* <SubMenu key="sub1" icon={<UserOutlined />} title="User">
