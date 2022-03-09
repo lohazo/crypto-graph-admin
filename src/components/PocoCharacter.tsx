@@ -203,6 +203,12 @@ function PocoCharacter() {
   });
   const columns: ColumnsType<Character> = [
     {
+      title: "ID",
+      // key: "recipient",
+      dataIndex: "id",
+      // ...getColumnSearchProps("id"),
+    },
+    {
       title: "NFT ID",
       // key: "recipient",
       dataIndex: "nft_id",
