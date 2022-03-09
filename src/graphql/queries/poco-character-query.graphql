@@ -1,7 +1,14 @@
-query PocoCharacter($limit: Int, $offset: Int, $where: character_bool_exp){
-  character(limit: $limit, offset: $offset, order_by: {created_at: desc}, where: $where) {
+query PocoCharacter($limit: Int, $offset: Int, $where: character_bool_exp) {
+  character(
+    limit: $limit
+    offset: $offset
+    order_by: { created_at: desc }
+    where: $where
+  ) {
     id
     nft_id
+    character_id
+    character_type_id
     user {
       id
       address
