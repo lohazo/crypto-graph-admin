@@ -243,7 +243,11 @@ function PocoCharacter() {
             >
               <a href="#"></a>
             </Popconfirm>
-            <PocoCharacterDetail id={record.nft_id} />
+            <PocoCharacterDetail
+              id={record.nft_id}
+              characterId={record.character_id}
+              characterTypeId={record.character_type_id}
+            />
           </>
         );
       },
