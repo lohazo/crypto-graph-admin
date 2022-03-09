@@ -5,7 +5,7 @@ import { usePocoPriceQuery } from "../generated/graphql";
 
 function PocoPrice() {
   const [queryResult] = usePocoPriceQuery();
-  const price = new BigNumber(queryResult.data?.poco_price?.[0].price || 0)
+  const price = new BigNumber(queryResult.data?.token_price?.[0].price || 0)
     .div(1e18)
     .toFixed(4);
 
