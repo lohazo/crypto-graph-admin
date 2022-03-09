@@ -4,23 +4,23 @@ import { Button, Drawer } from "antd";
 import React, { useEffect, useState } from "react";
 import { baseCharacters, baseSkill, baseType } from "../constants/characters";
 
-interface Character {
-  id: string;
-  cardId: string;
-  characterId: number;
-  name: string;
-  class: string;
-  typeId: number;
-  level: number;
-  baseColor: string;
-  skillId: number;
-  stats: {
-    power: number;
-    health: number;
-    speed: number;
-  };
-  description: string;
-}
+// interface Character {
+//   id: string;
+//   cardId: string;
+//   characterId: number;
+//   name: string;
+//   class: string;
+//   typeId: number;
+//   level: number;
+//   baseColor: string;
+//   skillId: number;
+//   stats: {
+//     power: number;
+//     health: number;
+//     speed: number;
+//   };
+//   description: string;
+// }
 
 function PocoCharacterDetail({
   id,
@@ -41,7 +41,7 @@ function PocoCharacterDetail({
 
   const [pocoData, setPocoData] = useState<any>({});
 
-  let characterInitFilter: Character =
+  let characterInitFilter: any =
     baseCharacters.filter(
       (character) =>
         character.characterId === characterId &&
