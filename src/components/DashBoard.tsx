@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { useDashBoardQuery } from "../generated/graphql";
+
 import EditPost from "./Post/EditPost";
 import PostList from "./Post/PostList";
 
 function DashBoard() {
-  const [queryResult] = useDashBoardQuery();
-
   return (
     <div className="pt-4">
       {/* <div className="grid gap-8 md:grid-cols-3">
