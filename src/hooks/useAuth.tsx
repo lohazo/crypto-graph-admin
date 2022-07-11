@@ -10,7 +10,7 @@ const localStorageKey = "signOut";
 
 const browserRedirectToIndexAfterSignOut = () => {
   // Browser redirect to purge sensitive session data.
-  window.location.href = "/login";
+  // window.location.href = "/login";
 };
 
 export const useAuth = () => {

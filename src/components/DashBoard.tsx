@@ -1,17 +1,14 @@
-import { Card, Statistic } from "antd";
-import Text from "antd/lib/typography/Text";
-import BigNumber from "bignumber.js";
-import React from "react";
+import React, { useState } from "react";
 import { useDashBoardQuery } from "../generated/graphql";
-import PocoPrice from "./PocoPrice";
-import RewardTransaction from "./RewardTransaction";
+import EditPost from "./Post/EditPost";
+import PostList from "./Post/PostList";
 
 function DashBoard() {
   const [queryResult] = useDashBoardQuery();
 
   return (
     <div className="pt-4">
-      <div className="grid gap-8 md:grid-cols-3">
+      {/* <div className="grid gap-8 md:grid-cols-3">
         <Card>
           <Statistic
             title="Total user"
@@ -31,10 +28,10 @@ function DashBoard() {
         <Card>
           <PocoPrice />
         </Card>
-      </div>
+      </div> */}
 
       <div className="mt-8">
-        <RewardTransaction />
+        <PostList />
       </div>
     </div>
   );

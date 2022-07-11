@@ -92,12 +92,12 @@ const MainLayout: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
             <Menu.Item key="1" icon={<WalletOutlined />}>
               <Link href="/">Dashboard</Link>
             </Menu.Item>
-            <Menu.Item key="2" icon={<UserOutlined />}>
+            {/* <Menu.Item key="2" icon={<UserOutlined />}>
               <Link href="/user">User</Link>
-            </Menu.Item>
-            <Menu.Item key="3" icon={<UserOutlined />}>
+            </Menu.Item> */}
+            {/* <Menu.Item key="3" icon={<UserOutlined />}>
               <Link href="/character">Character</Link>
-            </Menu.Item>
+            </Menu.Item> */}
 
             {/* <SubMenu key="sub1" icon={<UserOutlined />} title="User">
               <Menu.Item key="3">Tom</Menu.Item>
