@@ -19,6 +19,7 @@ interface IPostCreate {
   published: string;
   leadText: string;
   bodyText: string;
+  avatar: string;
 }
 
 function EditPost({ slug }: { slug: string }) {

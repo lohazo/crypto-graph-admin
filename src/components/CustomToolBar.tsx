@@ -90,18 +90,19 @@ const formats = [
   ],
 ];
 
-const renderOptions = (formatData) => {
+const renderOptions = (formatData: any) => {
   const { className, options } = formatData;
   return (
     <select className={className}>
+      {/* @ts-ignore */}
       <option selected="selected"></option>
       {options.map((value) => {
-        return <option value={value}></option>;
+        return <option key={value} value={value}></option>;
       })}
     </select>
   );
 };
-const renderSingle = (formatData) => {
+const renderSingle = (formatData: any) => {
   const { className, value } = formatData;
   return <button className={className} value={value}></button>;
 };
@@ -110,6 +111,7 @@ const CustomToolbar = () => (
     {formats.map((classes) => {
       return (
         <span className="ql-formats">
+          {/* eslint-disable-next-line react/jsx-key */}
           {classes.map((formatData) => {
             return formatData.options
               ? renderOptions(formatData)

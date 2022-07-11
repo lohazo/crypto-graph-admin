@@ -96,6 +96,7 @@ function StyledDropzone(props) {
     });
 
   const thumbs = files.map((file) => (
+    // @ts-ignore
     <div style={thumb} key={file.name}>
       <div style={thumbInner}>
         <img
@@ -127,11 +128,13 @@ function StyledDropzone(props) {
 
   return (
     <div className="container">
+      {/* @ts-ignore */}
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
         {!(thumbs.length > 0) ? (
-          <p>Drag 'n' drop some files here, or click to select files</p>
+          <p>Drag n drop some files here, or click to select files</p>
         ) : (
+          // @ts-ignore
           <aside style={thumbsContainer}>{thumbs}</aside>
         )}
       </div>
