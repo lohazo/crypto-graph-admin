@@ -52,13 +52,6 @@ const TextEditor: React.FC<Props> = ({
 
       const fileName = file.name;
 
-      const currentdate = new Date();
-      const fileNamePredecessor =
-        currentdate.getDate().toString() +
-        currentdate.getMonth().toString() +
-        currentdate.getFullYear().toString() +
-        currentdate.getTime().toString();
-
       const res = await uploadFiles(formData, fileName, quillRef.current);
     };
 
@@ -67,15 +60,6 @@ const TextEditor: React.FC<Props> = ({
       filename: string,
       quillObj
     ) => {
-      const currentdate = new Date();
-      const fileNamePredecessor =
-        currentdate.getDate().toString() +
-        currentdate.getMonth().toString() +
-        currentdate.getFullYear().toString() +
-        currentdate.getTime().toString();
-
-      filename = fileNamePredecessor + filename;
-
       // Upload file
       try {
         const uploadRes = await fetch(`${process.env.NEXT_PUBLIC_UPLOAD_URL}`, {
@@ -99,8 +83,6 @@ const TextEditor: React.FC<Props> = ({
   };
 
   const handleOnBlur = (range, source, editor) => {
-    // this.setState({ text: editor.getContents() });
-    // setText(editor.getHTML());
     onBlur?.(editor.getHTML());
     onChange?.(editor.getHTML());
   };
