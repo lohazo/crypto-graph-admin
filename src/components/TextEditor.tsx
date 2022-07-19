@@ -97,9 +97,10 @@ const TextEditor: React.FC<Props> = ({
     onChange?.(editor.getHTML());
   };
 
-  const handleChange = (value) => {
-    onChange?.(value);
-  };
+  // const handleChange = (value) => {
+  // console.log("🚀 ~> file: TextEditor.tsx ~> line 101 ~> handleChange ~> value", value)
+  //   onChange?.(value);
+  // };
 
   const modules = {
     toolbar: {
@@ -129,7 +130,7 @@ const TextEditor: React.FC<Props> = ({
       value={value}
       modules={modules}
       formats={formats}
-      onChange={handleChange}
+      // onChange={handleChange}
       placeholder={placeholder}
       onBlur={handleOnBlur}
     />
