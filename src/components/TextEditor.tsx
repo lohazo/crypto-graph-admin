@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button, notification } from "antd";
 import React, { useEffect } from "react";
 import ReactQuill from "react-quill";
 
@@ -45,31 +45,28 @@ const TextEditor: React.FC<Props> = ({
     input.click();
 
     input.onchange = async () => {
-      var file: any = input.files[0];
-      var formData = new FormData();
+      let file: any = input.files[0];
+      let formData = new FormData();
 
-      formData.append("image", file);
+      formData.append("avatar", file);
 
-      var fileName = file.name;
+      const fileName = file.name;
 
-      const res = await uploadFiles(file, fileName, quillRef.current);
-      console.log(
-        "🚀 ~> file: Editor.tsx ~> line 23 ~> input.onchange= ~> res",
-        res
-      );
+      const currentdate = new Date();
+      const fileNamePredecessor =
+        currentdate.getDate().toString() +
+        currentdate.getMonth().toString() +
+        currentdate.getFullYear().toString() +
+        currentdate.getTime().toString();
+
+      const res = await uploadFiles(formData, fileName, quillRef.current);
     };
 
     const uploadFiles = async (
-      uploadFileObj: File,
+      uploadFileObj: FormData,
       filename: string,
       quillObj
     ) => {
-      console.log(
-        "🚀 ~> file: Editor.tsx ~> line 26 ~> uploadFile ~> file",
-        uploadFileObj,
-        filename
-      );
-
       const currentdate = new Date();
       const fileNamePredecessor =
         currentdate.getDate().toString() +
@@ -80,13 +77,24 @@ const TextEditor: React.FC<Props> = ({
       filename = fileNamePredecessor + filename;
 
       // Upload file
+      try {
+        const uploadRes = await fetch(`${process.env.NEXT_PUBLIC_UPLOAD_URL}`, {
+          method: "POST",
+          body: uploadFileObj,
+        }).then((res) => res.json());
 
-      const range = quillObj.getEditorSelection();
-
-      // const res = "siteUrl" + "/" + "listName" + "/" + filename;
-      const res = "http://maccenter.vn/MacFamily/iPhone13-Pro-2021.jpg";
-
-      quillObj.getEditor().insertEmbed(range.index, "image", res);
+        if (uploadRes.data) {
+          const range = quillObj.getEditorSelection();
+          quillObj
+            .getEditor()
+            .insertEmbed(range.index, "image", uploadRes.data);
+        }
+      } catch (error) {
+        console.log(error);
+        notification.error({
+          message: "Upload Failed",
+        });
+      }
     };
   };
 
