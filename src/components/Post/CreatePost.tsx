@@ -1,11 +1,10 @@
 import {
   Button,
   Card,
-  DatePicker,
+  // DatePicker,
   Form,
   Input,
   notification,
-  TimePicker,
 } from "antd";
 import moment from "moment";
 import dynamic from "next/dynamic";
@@ -14,8 +13,7 @@ import React, { useEffect, useState } from "react";
 import slugify from "slugify";
 import SelectCategory from "./SelectCategory";
 import SelectTags from "./SelectTag";
-// import TextEditor from "../TextEditor";
-import StyledDropzone from "./UploadPostAvatar";
+import DatePicker from "./DatePicker";
 import UploadAvatar from "./UploadPostAvatarV2";
 
 const TextEditor = dynamic(() => import("../TextEditor"), {
