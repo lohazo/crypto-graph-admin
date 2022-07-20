@@ -6,7 +6,6 @@ import {
   Input,
   notification,
 } from "antd";
-import moment from "moment";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -16,19 +15,19 @@ import SelectTags from "./SelectTag";
 import DatePicker from "./DatePicker";
 import UploadAvatar from "./UploadPostAvatarV2";
 import dayjs from "dayjs";
-import advancedFormat from 'dayjs/plugin/advancedFormat'
-import customParseFormat from 'dayjs/plugin/customParseFormat'
-import localeData from 'dayjs/plugin/localeData'
-import weekday from 'dayjs/plugin/weekday'
-import weekOfYear from 'dayjs/plugin/weekOfYear'
-import weekYear from 'dayjs/plugin/weekYear'
+import advancedFormat from "dayjs/plugin/advancedFormat";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import localeData from "dayjs/plugin/localeData";
+import weekday from "dayjs/plugin/weekday";
+import weekOfYear from "dayjs/plugin/weekOfYear";
+import weekYear from "dayjs/plugin/weekYear";
 
-dayjs.extend(customParseFormat)
-dayjs.extend(advancedFormat)
-dayjs.extend(weekday)
-dayjs.extend(localeData)
-dayjs.extend(weekOfYear)
-dayjs.extend(weekYear)
+dayjs.extend(customParseFormat);
+dayjs.extend(advancedFormat);
+dayjs.extend(weekday);
+dayjs.extend(localeData);
+dayjs.extend(weekOfYear);
+dayjs.extend(weekYear);
 
 const TextEditor = dynamic(() => import("../TextEditor"), {
   ssr: false,
@@ -39,19 +38,30 @@ function CreatePost() {
 
   const [categories, setCategories] = useState<any[]>([]);
   const [tags, setTags] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getData = async () => {
-    const [catRes, tagRes] = await Promise.all([
-      fetch(
-        `${process.env.NEXT_PUBLIC_REST_API}/post/category?limit=1000`
-      ).then((res) => res.json()),
-      fetch(`${process.env.NEXT_PUBLIC_REST_API}/post/tag?limit=1000`).then(
-        (res) => res.json()
-      ),
-    ]);
+    setIsLoading(true);
 
-    setCategories(catRes.data?.result);
-    setTags(tagRes.data?.result);
+    try {
+      const [catRes, tagRes] = await Promise.all([
+        fetch(
+          `${process.env.NEXT_PUBLIC_REST_API}/post/category?limit=1000`
+        ).then((res) => res.json()),
+        fetch(`${process.env.NEXT_PUBLIC_REST_API}/post/tag?limit=1000`).then(
+          (res) => res.json()
+        ),
+      ]);
+
+      setCategories(catRes.data?.result);
+      setTags(tagRes.data?.result);
+    } catch (error) {
+      console.log(error);
+      notification.error({
+        message: "Error",
+      });
+    }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -96,11 +106,25 @@ function CreatePost() {
 
   return (
     <div>
-      <Form layout="vertical" form={form} onFinish={onSubmit}>
+      <Form
+        layout="vertical"
+        form={form}
+        onFinish={onSubmit}
+        disabled={isLoading}
+      >
         <div className="grid grid-cols-12 gap-4 mt-4">
           <div className="col-span-12 md:col-span-8">
             <Card title="Post">
-              <Form.Item label="Title" name="title">
+              <Form.Item
+                label="Title"
+                name="title"
+                rules={[
+                  {
+                    required: true,
+                    message: "Title is required",
+                  },
+                ]}
+              >
                 <Input size="large" />
               </Form.Item>
               <p>SLUG: {slug}</p>
@@ -113,7 +137,16 @@ function CreatePost() {
                 <DatePicker />
               </Form.Item>
 
-              <Form.Item label="Lead text" name="leadText">
+              <Form.Item
+                label="Lead text"
+                name="leadText"
+                rules={[
+                  {
+                    required: true,
+                    message: "Lead text is required",
+                  },
+                ]}
+              >
                 <Input />
               </Form.Item>
 
@@ -137,7 +170,7 @@ function CreatePost() {
               </Form.Item>
 
               <Form.Item>
-                <Button htmlType="submit" type="primary">
+                <Button htmlType="submit" type="primary" disabled={isLoading}>
                   Save
                 </Button>
               </Form.Item>
@@ -146,20 +179,44 @@ function CreatePost() {
 
           <div className="col-span-12 md:col-span-4">
             <Card title="Category">
-              <Form.Item name="category">
+              <Form.Item
+                name="category"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please select category",
+                  },
+                ]}
+              >
                 <SelectCategory categories={categories} />
               </Form.Item>
             </Card>
             <Card title="Tag" className="mt-4">
-              <Form.Item name="tags">
+              <Form.Item
+                name="tags"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please select tags",
+                  },
+                ]}
+              >
                 {/* @ts-ignore */}
                 <SelectTags tags={tags} placeholder="Select tags" />
               </Form.Item>
             </Card>
-            <Card title="Author" className="mt-4"></Card>
+            {/* <Card title="Author" className="mt-4"></Card> */}
             <Card title="Avatar" className="mt-4">
               {/* <StyledDropzone /> */}
-              <Form.Item name="avatar">
+              <Form.Item
+                name="avatar"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please upload Post Avatar",
+                  },
+                ]}
+              >
                 <UploadAvatar />
               </Form.Item>
             </Card>

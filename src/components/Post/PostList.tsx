@@ -1,4 +1,5 @@
-import { Button, Card, Table } from "antd";
+import { QuestionCircleOutlined } from "@ant-design/icons";
+import { Button, Card, notification, Popconfirm, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -99,10 +100,47 @@ function PostList() {
           <Link href={`/post/${record.slug}`}>
             <Button type="link">Edit</Button>
           </Link>
+          <Popconfirm
+            title="Are you sure？"
+            icon={<QuestionCircleOutlined style={{ color: "red" }} />}
+            onConfirm={() => handleDeletePost(record._id)}
+          >
+            <a href="#" style={{ color: "red" }}>
+              Delete
+            </a>
+          </Popconfirm>
         </div>
       ),
     },
   ];
+
+  const handleDeletePost = async (id: string) => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_REST_API}/post/deletePost`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ postId: id }),
+      }
+    );
+    const data = await response.json();
+    if (data.error) {
+      notification.error({
+        message: "Delete Post Error",
+        description: data.error,
+        duration: 4,
+      });
+      return;
+    }
+    notification.success({
+      message: "Delete Post Success",
+      description: "Post has been deleted",
+      duration: 4,
+    });
+    getData();
+  };
 
   return (
     <div>
