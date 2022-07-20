@@ -101,7 +101,7 @@ function CreatePost() {
       return;
     }
 
-    router.replace("/post/[slug]", `/post/${res.data.slug}`);
+    router.replace("/");
   };
 
   return (
