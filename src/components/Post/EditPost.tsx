@@ -1,4 +1,4 @@
-import { Button, Card, Form, Input, TimePicker } from "antd";
+import { Button, Card, DatePicker, Form, Input, TimePicker } from "antd";
 import moment from "moment";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
@@ -111,13 +111,9 @@ function EditPost({ slug }: { slug: string }) {
             <Form.Item
               label="Published"
               name="published"
-              // initialValue={post?.published}
+              initialValue={post?.published}
             >
-              <TimePicker
-                // @ts-ignore
-                // defaultValue={moment(new Date(), "HH:mm")}
-                format={"HH:mm"}
-              />
+              <DatePicker />
             </Form.Item>
 
             <Form.Item
