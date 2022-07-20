@@ -15,6 +15,20 @@ import SelectCategory from "./SelectCategory";
 import SelectTags from "./SelectTag";
 import DatePicker from "./DatePicker";
 import UploadAvatar from "./UploadPostAvatarV2";
+import dayjs from "dayjs";
+import advancedFormat from 'dayjs/plugin/advancedFormat'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+import localeData from 'dayjs/plugin/localeData'
+import weekday from 'dayjs/plugin/weekday'
+import weekOfYear from 'dayjs/plugin/weekOfYear'
+import weekYear from 'dayjs/plugin/weekYear'
+
+dayjs.extend(customParseFormat)
+dayjs.extend(advancedFormat)
+dayjs.extend(weekday)
+dayjs.extend(localeData)
+dayjs.extend(weekOfYear)
+dayjs.extend(weekYear)
 
 const TextEditor = dynamic(() => import("../TextEditor"), {
   ssr: false,
@@ -94,7 +108,7 @@ function CreatePost() {
               <Form.Item
                 label="Published"
                 name="published"
-                initialValue={moment(new Date(), "HH:mm dd/MM/yyyy")}
+                initialValue={dayjs(new Date())}
               >
                 <DatePicker />
               </Form.Item>
