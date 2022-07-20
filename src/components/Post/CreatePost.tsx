@@ -93,11 +93,11 @@ function CreatePost() {
               </Form.Item>
               <p>SLUG: {slug}</p>
 
-              <Form.Item label="Published" name="published">
-                {/* <TimePicker
-                  defaultValue={moment(new Date(), "HH:mm dd/MM/yyyy")}
-                  format={"HH:mm dd/MM/yyyy"}
-                /> */}
+              <Form.Item
+                label="Published"
+                name="published"
+                initialValue={moment(new Date(), "HH:mm dd/MM/yyyy")}
+              >
                 <DatePicker />
               </Form.Item>
 
